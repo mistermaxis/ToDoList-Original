@@ -2,11 +2,11 @@
 
 # Project Name
 
-> One paragraph statement about the project.
+> Todo List project for the Webpack section in Microverse Module 2.
 
 ![screenshot](./app_screenshot.jpg)
 
-Additional description about the project and its features.
+This web app is required to be built using webpack, have an interactive list of task you can add to and remove from. Also, you must be able to drag and drop list items into different positions.
 
 ## Built With
 
@@ -15,7 +15,7 @@ Additional description about the project and its features.
 
 ## Live Demo
 
-[Live Demo Link Not Yet Available](https://livedemo.com)
+[Live Demo Link Not Yet Available](https://github.com/webdevmaxi)
 
 
 ## Getting Started
@@ -28,17 +28,10 @@ To get a local copy up and running follow these simple example steps.
 
 ## Authors
 
-👤 **Author1**
+👤 **Maximiliano Diaz**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
-
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@webdevmaxi](https://github.com/webdevmaxi)
+- LinkedIn: [@mistermaxis](https://linkedin.com/in/linkedinhandle)
 
 ## 🤝 Contributing
 
@@ -53,7 +46,7 @@ Give a ⭐️ if you like this project!
 ## Acknowledgments
 
 - Microverse
--
+- Nikos Pountzas: [@pountzas](https://github.com/pountzas)
 
 ## 📝 License
 
