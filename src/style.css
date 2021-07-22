@@ -1,3 +1,59 @@
-body {
-  text-align: right;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.full-width-container {
+  background-color: bisque;
+  width: 50%;
+  box-shadow: 0.15rem 0.15rem 0.4rem lightgray, -0.15rem 0.15rem 0.4rem lightgray;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.input-container {
+  padding: 0 1rem;
+  outline: 0.05rem solid lightgray;
+}
+
+.add-input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  padding: 1rem 0;
+}
+
+.add-input:focus {
+  outline: none;
+}
+
+.list-item {
+  border: #ddd solid;
+  border-width: 0.1rem 0;
+  padding: 1rem;
+}
+
+.item-completed {
+  margin-right: 0.5rem;
+}
+
+.app-header {
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .full-width-container {
+    width: 95%;
+  }
 }

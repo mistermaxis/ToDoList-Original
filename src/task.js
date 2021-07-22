@@ -1,15 +1,13 @@
-class Task {
-  description = String;
+export default class Task {
+    description = String;
 
-  completed = Boolean;
+    completed = Boolean;
 
-  index = Number;
+    index = Number;
 
-  constructor(desc, comp, idx) {
-    this.description = desc;
-    this.completed = comp;
-    this.index = idx;
-  }
+    constructor(desc, comp, idx) {
+      this.description = desc;
+      this.completed = comp;
+      this.index = idx;
+    }
 }
-
-module.exports(Task);
