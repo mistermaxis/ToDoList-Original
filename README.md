@@ -15,7 +15,7 @@ This web app is required to be built using webpack, have an interactive list of 
 
 ## Live Demo
 
-[Live Demo Link Not Yet Available](https://github.com/webdevmaxi)
+[Live Demo](https://webdevmaxi.github.io/ToDoList/)
 
 
 ## Getting Started
