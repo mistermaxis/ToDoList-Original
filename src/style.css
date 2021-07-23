@@ -11,6 +11,11 @@
     padding: 1rem;
 }
 
+.flex-list-item {
+    display: flex;
+    align-items: center;
+}
+
 .full-width-container {
     background-color: bisque;
     width: 30%;
@@ -45,6 +50,33 @@
 
 .item-completed {
     margin-right: 0.5rem;
+}
+
+.item-description {
+    flex-grow: 2;
+    user-select: none;
+}
+
+.drag-button {
+    padding: 0 0.5rem;
+    cursor: move;
+    background-color: transparent;
+    border: none;
+}
+
+.drag-icon {
+    align-self: center;
+    user-select: none;
+    pointer-events: none;
+    height: 1rem;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
 }
 
 .complete {
