@@ -12,10 +12,9 @@ export default class TaskList {
 
     constructor() {
       TaskList.itemID = 0;
-      /*
-      
-      */
+
       Storage.loadFromStorage(TaskList.taskList);
+
       TaskList.taskListContainer = document.createElement('div');
       TaskList.updateList();
     }
@@ -82,9 +81,11 @@ export default class TaskList {
       itemNoDrag.removeEventListener('dragend', TaskList.onDragEnd);
     }
 
+    /* eslint-disable */
     get taskListComponent() {
       return TaskList.taskListContainer;
     }
+    /* eslint-enable */
 
     static updateList() {
       TaskList.taskList.sort((a, b) => a.index - b.index);
