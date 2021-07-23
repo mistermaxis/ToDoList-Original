@@ -28,7 +28,10 @@ export default class TaskList {
       } else if (checkbox.checked === false) {
         checkbox.nextSibling.classList.remove('complete');
       }
+
       CompletedTask.updateCompleted(TaskList.taskList, listContainer.id);
+
+      Storage.saveToStorage(TaskList.taskList);
     }
 
     static onDragStart(event) {
