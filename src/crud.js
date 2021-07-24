@@ -11,7 +11,7 @@ export default class Crud {
 
     taskList.splice(idx, 1);
 
-    for (let i = 0; i < taskList.length; i+=1) {
+    for (let i = 0; i < taskList.length; i += 1) {
       taskList[i].index = i;
     }
   }
@@ -19,6 +19,6 @@ export default class Crud {
   static update(taskList, index, newDescription) {
     const idx = parseInt(index, 10);
 
-    taskList[index].description = newDescription;
+    taskList[idx].description = newDescription;
   }
 }

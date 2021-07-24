@@ -95,9 +95,7 @@ export default class TaskList {
     }
 
     static addItemToList(event) {
-
       if (event.key === 'Enter') {
-
         const inputText = event.currentTarget;
         const textValue = inputText.value;
 
@@ -105,6 +103,9 @@ export default class TaskList {
         TaskList.itemID += 1;
 
         inputText.value = '';
+
+        Storage.saveToStorage(TaskList.taskList);
+
         TaskList.updateList();
       }
     }
@@ -142,23 +143,27 @@ export default class TaskList {
     }
 
     static UpdateItem(event) {
-      if(event.key === 'Enter') {
+      if (event.key === 'Enter') {
         const inputEdit = event.currentTarget;
         const itemLabel = inputEdit.parentElement.children[1];
         itemLabel.innerText = inputEdit.value;
         TaskList.cancelEdit(event);
 
         Crud.update(TaskList.taskList, inputEdit.parentElement.id, itemLabel.innerText);
+
+        Storage.saveToStorage(TaskList.taskList);
       }
     }
 
     static removeItem(event) {
       const taskItem = event.currentTarget.parentElement;
-      //const taskParent = taskItem.parentElement;
 
       Crud.delete(TaskList.taskList, taskItem.id);
 
+      Storage.saveToStorage(TaskList.taskList);
+
       TaskList.updateList();
+      TaskList.itemID -= 1;
     }
 
     /* eslint-disable */
