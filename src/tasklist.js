@@ -166,6 +166,19 @@ export default class TaskList {
       TaskList.itemID -= 1;
     }
 
+    static clearCompleted() {
+      TaskList.taskList = TaskList.taskList.filter((task) => task.completed === false);
+
+      for (let i = 0; i < TaskList.taskList.length; i += 1) {
+        TaskList.taskList[i].index = i;
+      }
+
+      TaskList.itemID = TaskList.taskList.length;
+
+      Storage.saveToStorage(TaskList.taskList);
+      TaskList.updateList();
+    }
+
     /* eslint-disable */
     get taskListComponent() {
       return TaskList.taskListContainer;
@@ -245,5 +258,11 @@ export default class TaskList {
         listItem.appendChild(trashButton);
         TaskList.taskListContainer.appendChild(listItem);
       });
+      const clearAllButton = document.createElement('button');
+      clearAllButton.classList.add('clear-all-button');
+      clearAllButton.innerText = 'Clear all completed';
+      clearAllButton.type = 'button';
+      clearAllButton.addEventListener('click', TaskList.clearCompleted);
+      TaskList.taskListContainer.appendChild(clearAllButton);
     }
 }

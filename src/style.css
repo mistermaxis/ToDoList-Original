@@ -98,6 +98,13 @@ body {
   opacity: 0.5;
 }
 
+.clear-all-button {
+  background-color: transparent;
+  border: none;
+  padding: 1rem 0;
+  width: 100%;
+}
+
 .hidden {
   visibility: hidden;
 }
