@@ -2,7 +2,8 @@ import CompletedTask from './completed.js';
 import DragDropTask from './drag-drop.js';
 import Storage from './storage.js';
 import Crud from './crud.js';
-import EnterIcon from './enter-icon.png'
+import EnterIcon from './enter-icon.png';
+import TrashIcon from './trash-icon.png';
 import DragIcon from './drag-icon.svg';
 
 export default class TaskList {
@@ -12,20 +13,20 @@ export default class TaskList {
 
     static taskListContainer;
 
-    static listForm;
+    static listInput;
 
     constructor() {
       TaskList.itemID = 0;
 
-      //Storage.loadFromStorage(TaskList.taskList);
+      // Storage.loadFromStorage(TaskList.taskList);
 
       document.getElementById('enter-icon').src = EnterIcon;
 
-      TaskList.listForm = document.getElementById('todo-list');
-      TaskList.listForm.addEventListener('submit', TaskList.addItemToList);
+      TaskList.listInput = document.getElementById('add-todo');
+      TaskList.listInput.addEventListener('keyup', TaskList.addItemToList);
 
       TaskList.taskListContainer = document.createElement('div');
-      
+
       TaskList.updateList();
     }
 
@@ -94,15 +95,58 @@ export default class TaskList {
     }
 
     static addItemToList(event) {
-      event.preventDefault();
-      const inputText = event.currentTarget.elements['add-todo'].value;
 
-      Crud.add(TaskList.taskList, inputText, TaskList.itemID);
-      TaskList.itemID += 1;
+      if (event.key === 'Enter') {
+
+        const inputText = event.currentTarget;
+        const textValue = inputText.value;
+
+        Crud.add(TaskList.taskList, textValue, TaskList.itemID);
+        TaskList.itemID += 1;
+
+        inputText.value = '';
+        TaskList.updateList();
+      }
+    }
+
+    static editItem(event) {
+      const listIttemChildren = event.currentTarget.parentElement.children;
+
+      for (let i = 1; i < listIttemChildren.length; i += 1) {
+        if (i < 3) {
+          listIttemChildren[i].classList.remove('enabled');
+          listIttemChildren[i].classList.add('disabled');
+        } else {
+          listIttemChildren[i].classList.remove('disabled');
+          listIttemChildren[i].classList.add('enabled');
+        }
+      }
+      listIttemChildren[3].focus();
+    }
+
+    static cancelEdit(event) {
+      const listIttemChildren = event.currentTarget.parentElement.children;
+
+      setTimeout(() => {
+        for (let i = 1; i < listIttemChildren.length; i += 1) {
+          if (i < 3) {
+            listIttemChildren[i].classList.remove('disabled');
+            listIttemChildren[i].classList.add('enabled');
+          } else {
+            listIttemChildren[i].classList.remove('enabled');
+            listIttemChildren[i].classList.add('disabled');
+          }
+        }
+      }, 100);
+    }
+
+    static removeItem(event) {
+      const taskItem = event.currentTarget.parentElement;
+      //const taskParent = taskItem.parentElement;
+
+      Crud.delete(TaskList.taskList, taskItem.id);
 
       TaskList.updateList();
-
-      event.currentTarget.reset();
     }
 
     /* eslint-disable */
@@ -117,22 +161,28 @@ export default class TaskList {
       TaskList.taskListContainer.innerHTML = '';
 
       TaskList.taskList.forEach((task) => {
+        // List Item Container
         const listItem = document.createElement('div');
         listItem.classList.add('list-item');
         listItem.classList.add('flex-list-item');
         listItem.id = task.index;
 
+        // Item Completed Checkbox
         const itemCompleted = document.createElement('input');
         itemCompleted.type = 'checkbox';
         itemCompleted.checked = task.completed;
         itemCompleted.classList.add('item-completed');
         itemCompleted.addEventListener('change', TaskList.updateTaskComplete);
 
+        // Item Description
         const itemDescription = document.createElement('label');
         itemDescription.innerText = task.description;
         itemDescription.classList.add('item-description');
+        itemDescription.addEventListener('click', TaskList.editItem);
 
+        // Drag Button
         const dragButton = document.createElement('button');
+        dragButton.type = 'button';
 
         const itemIcon = document.createElement('img');
         itemIcon.classList.add('drag-icon');
@@ -145,13 +195,38 @@ export default class TaskList {
         dragButton.addEventListener('mouseover', TaskList.changeToDrag);
         dragButton.addEventListener('mouseleave', TaskList.changeToNoDrag);
 
+        // Edit Input Field
+        const editInput = document.createElement('input');
+        editInput.type = 'text';
+        editInput.classList.add('edit-input');
+        editInput.classList.add('disabled');
+
+        editInput.addEventListener('focusout', TaskList.cancelEdit);
+
+        // Delete Button
+        const trashIcon = document.createElement('img');
+        trashIcon.src = TrashIcon;
+        trashIcon.classList.add('trash-icon');
+
+        const trashButton = document.createElement('button');
+        trashButton.classList.add('trash-button');
+        trashButton.appendChild(trashIcon);
+        trashButton.classList.add('disabled');
+        trashButton.type = 'button';
+
+        trashButton.addEventListener('click', TaskList.removeItem);
+
+        // Adding Everything Together
         listItem.addEventListener('drop', TaskList.onDrop);
         listItem.addEventListener('dragover', TaskList.onDragOver);
 
         listItem.appendChild(itemCompleted);
         listItem.appendChild(itemDescription);
         listItem.appendChild(dragButton);
+        listItem.appendChild(editInput);
+        listItem.appendChild(trashButton);
         TaskList.taskListContainer.appendChild(listItem);
       });
+      console.log(TaskList.taskList);
     }
 }
