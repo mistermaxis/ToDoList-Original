@@ -1,6 +1,8 @@
 import CompletedTask from './completed.js';
 import DragDropTask from './drag-drop.js';
 import Storage from './storage.js';
+import Crud from './crud.js';
+import EnterIcon from './enter-icon.png'
 import DragIcon from './drag-icon.svg';
 
 export default class TaskList {
@@ -10,12 +12,20 @@ export default class TaskList {
 
     static taskListContainer;
 
+    static listForm;
+
     constructor() {
       TaskList.itemID = 0;
 
-      Storage.loadFromStorage(TaskList.taskList);
+      //Storage.loadFromStorage(TaskList.taskList);
+
+      document.getElementById('enter-icon').src = EnterIcon;
+
+      TaskList.listForm = document.getElementById('todo-list');
+      TaskList.listForm.addEventListener('submit', TaskList.addItemToList);
 
       TaskList.taskListContainer = document.createElement('div');
+      
       TaskList.updateList();
     }
 
@@ -51,7 +61,6 @@ export default class TaskList {
     static onDragEnd(event) {
       const item = event.currentTarget;
       item.classList.remove('hidden');
-      item.classList.add('dragged');
       item.classList.add('visible');
     }
 
@@ -82,6 +91,18 @@ export default class TaskList {
 
       itemNoDrag.removeEventListener('dragstart', TaskList.onDragStart);
       itemNoDrag.removeEventListener('dragend', TaskList.onDragEnd);
+    }
+
+    static addItemToList(event) {
+      event.preventDefault();
+      const inputText = event.currentTarget.elements['add-todo'].value;
+
+      Crud.add(TaskList.taskList, inputText, TaskList.itemID);
+      TaskList.itemID += 1;
+
+      TaskList.updateList();
+
+      event.currentTarget.reset();
     }
 
     /* eslint-disable */
