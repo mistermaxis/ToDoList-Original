@@ -13,11 +13,12 @@ export default class Crud {
 
     for (let i = 0; i < taskList.length; i+=1) {
       taskList[i].index = i;
-      console.log(i);
     }
   }
 
-  static update() {
+  static update(taskList, index, newDescription) {
+    const idx = parseInt(index, 10);
 
+    taskList[index].description = newDescription;
   }
 }

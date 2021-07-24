@@ -110,34 +110,46 @@ export default class TaskList {
     }
 
     static editItem(event) {
-      const listIttemChildren = event.currentTarget.parentElement.children;
+      const listItemChildren = event.currentTarget.parentElement.children;
 
-      for (let i = 1; i < listIttemChildren.length; i += 1) {
+      for (let i = 1; i < listItemChildren.length; i += 1) {
         if (i < 3) {
-          listIttemChildren[i].classList.remove('enabled');
-          listIttemChildren[i].classList.add('disabled');
+          listItemChildren[i].classList.remove('enabled');
+          listItemChildren[i].classList.add('disabled');
         } else {
-          listIttemChildren[i].classList.remove('disabled');
-          listIttemChildren[i].classList.add('enabled');
+          listItemChildren[i].classList.remove('disabled');
+          listItemChildren[i].classList.add('enabled');
         }
       }
-      listIttemChildren[3].focus();
+      listItemChildren[3].focus();
     }
 
     static cancelEdit(event) {
-      const listIttemChildren = event.currentTarget.parentElement.children;
+      const listItemChildren = event.currentTarget.parentElement.children;
 
       setTimeout(() => {
-        for (let i = 1; i < listIttemChildren.length; i += 1) {
+        for (let i = 1; i < listItemChildren.length; i += 1) {
           if (i < 3) {
-            listIttemChildren[i].classList.remove('disabled');
-            listIttemChildren[i].classList.add('enabled');
+            listItemChildren[i].classList.remove('disabled');
+            listItemChildren[i].classList.add('enabled');
           } else {
-            listIttemChildren[i].classList.remove('enabled');
-            listIttemChildren[i].classList.add('disabled');
+            listItemChildren[i].classList.remove('enabled');
+            listItemChildren[i].classList.add('disabled');
           }
         }
       }, 100);
+      listItemChildren[3].value = '';
+    }
+
+    static UpdateItem(event) {
+      if(event.key === 'Enter') {
+        const inputEdit = event.currentTarget;
+        const itemLabel = inputEdit.parentElement.children[1];
+        itemLabel.innerText = inputEdit.value;
+        TaskList.cancelEdit(event);
+
+        Crud.update(TaskList.taskList, inputEdit.parentElement.id, itemLabel.innerText);
+      }
     }
 
     static removeItem(event) {
@@ -202,6 +214,7 @@ export default class TaskList {
         editInput.classList.add('disabled');
 
         editInput.addEventListener('focusout', TaskList.cancelEdit);
+        editInput.addEventListener('keyup', TaskList.UpdateItem);
 
         // Delete Button
         const trashIcon = document.createElement('img');
@@ -227,6 +240,5 @@ export default class TaskList {
         listItem.appendChild(trashButton);
         TaskList.taskListContainer.appendChild(listItem);
       });
-      console.log(TaskList.taskList);
     }
 }
