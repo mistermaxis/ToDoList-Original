@@ -18,7 +18,7 @@ export default class TaskList {
     constructor() {
       TaskList.itemID = 0;
 
-      // Storage.loadFromStorage(TaskList.taskList);
+      Storage.loadFromStorage(TaskList.taskList);
 
       document.getElementById('enter-icon').src = EnterIcon;
 
