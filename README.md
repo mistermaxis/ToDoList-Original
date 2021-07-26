@@ -4,7 +4,9 @@
 
 > Todo List project for the Webpack section in Microverse Module 2.
 
-![screenshot](./app_screenshot.jpg)
+<p align="center">
+  <img src="./app_screenshot.jpg">
+</p>
 
 This web app is required to be built using webpack, have an interactive list of task you can add to and remove from. Also, you must be able to drag and drop list items into different positions.
 
