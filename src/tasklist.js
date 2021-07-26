@@ -222,8 +222,8 @@ export default class TaskList {
         dragButton.classList.add('drag-button');
         dragButton.classList.add('flex-list-item');
 
-        dragButton.addEventListener('mouseover', TaskList.changeToDrag);
-        dragButton.addEventListener('mouseleave', TaskList.changeToNoDrag);
+        dragButton.addEventListener('mousedown', TaskList.changeToDrag);
+        dragButton.addEventListener('mouseup', TaskList.changeToNoDrag);
 
         // Edit Input Field
         const editInput = document.createElement('input');
