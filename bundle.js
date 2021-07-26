@@ -166,7 +166,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sty
   \************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Storage)\n/* harmony export */ });\n/* harmony import */ var _task_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./task.js */ \"./src/task.js\");\n\n\nclass Storage {\n  static saveToStorage(taskList) {\n    const stringList = JSON.stringify(taskList);\n    window.localStorage.setItem('tasklist', stringList);\n  }\n\n  static loadFromStorage(taskList) {\n    const data = window.localStorage.getItem('tasklist');\n\n    if (data !== null) {\n      const list = JSON.parse(data);\n      list.forEach((li) => {\n        taskList.push(li);\n      });\n    }\n  }\n}\n\n\n//# sourceURL=webpack://webpackproject/./src/storage.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Storage)\n/* harmony export */ });\nclass Storage {\n  static saveToStorage(taskList) {\n    const stringList = JSON.stringify(taskList);\n    window.localStorage.setItem('tasklist', stringList);\n  }\n\n  static loadFromStorage(taskList) {\n    const data = window.localStorage.getItem('tasklist');\n\n    if (data !== null) {\n      const list = JSON.parse(data);\n      list.forEach((li) => {\n        taskList.push(li);\n      });\n    }\n  }\n}\n\n\n//# sourceURL=webpack://webpackproject/./src/storage.js?");
 
 /***/ }),
 
