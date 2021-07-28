@@ -34,9 +34,9 @@ export default class TaskList {
       const checkbox = event.currentTarget;
       const listContainer = checkbox.parentElement;
 
-      if (checkbox.checked === true) {
+      if (checkbox.checked) {
         checkbox.nextSibling.classList.add('complete');
-      } else if (checkbox.checked === false) {
+      } else {
         checkbox.nextSibling.classList.remove('complete');
       }
 
